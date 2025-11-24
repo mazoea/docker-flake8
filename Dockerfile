@@ -1,14 +1,12 @@
-FROM python:3.13-alpine
-
-RUN adduser -D flake8
+FROM python:alpine
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir flake8 && \
     rm -rf /root/.cache
 
 WORKDIR /opt/src/
-
-USER flake8
+RUN adduser -D maz
+USER maz
 
 ENTRYPOINT [ "flake8" ]
 CMD [ "--version" ]
